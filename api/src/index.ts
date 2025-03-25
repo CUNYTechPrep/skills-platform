@@ -5,7 +5,7 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
-app.get("/", (_req: Request, res: Response) => {
+app.get("/api/test", (_req: Request, res: Response) => {
   res.json({
     message: "Welcome to the CTP Skills Platform",
   });
