@@ -1,0 +1,28 @@
+{
+  "name": "skills-platform-api",
+  "version": "0.0.1",
+  "description": "The backend REST API for the CTP skills platform",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "dev": "nodemon -r dotenv/config src/index.ts",
+    "start": "node dist/index.js",
+    "prettier": "prettier --check"
+  },
+  "keywords": [],
+  "author": "CUNY Tech Prep",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.13",
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.9",
+    "prettier": "3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
+}
