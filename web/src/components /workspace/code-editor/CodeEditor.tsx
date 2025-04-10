@@ -4,7 +4,7 @@ import "./code-editor.css";
 
 type CodeEditorProps = {};
 const CodeEditor: React.FC<CodeEditorProps> = () => {
-  const [code, setCode] = useState<string>("");
+  const [code, setCode] = useState<string>(""); // store user input
   const [output, setOutput] = useState<string | null>(null); // State to store the backend response
   const [error, setError] = useState<string | null>(null); // State to store errors
 
@@ -22,11 +22,19 @@ const CodeEditor: React.FC<CodeEditorProps> = () => {
       });
 
       const data = await response.json();
-      console.log("Result:", data.result);
-    } catch (error) {
-      console.error("Error:", error);
+      if (response.ok) {
+        setOutput(data.result); // Display the result
+        setError(null); // Clear any previous errors
+      } else {
+        setError(data.error || "An error occurred while executing the code."); // Display backend error
+        setOutput(null);
+      }
+    } catch (err) {
+      setError("Failed to connect to the backend."); // Display connection error
+      setOutput(null);
     }
   };
+
   return (
     <>
       <div className="monaco-editor-container">
@@ -47,18 +55,17 @@ const CodeEditor: React.FC<CodeEditorProps> = () => {
       <div className="output-container">
         {output && (
           <div className="output">
-            <strong>Ouput:</strong>
-            {output}
+            <strong>Output:</strong> {output}
           </div>
         )}
         {error && (
           <div className="error">
-            <strong>Error:</strong>
-            {error}
+            <strong>Error:</strong> {error}
           </div>
         )}
       </div>
     </>
   );
 };
+
 export default CodeEditor;
