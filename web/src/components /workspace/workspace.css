@@ -1,0 +1,25 @@
+/* Parent container for the workspace */
+.workspace {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+}
+
+/* Left panel: Problem description */
+.problem-description {
+  width: 50%; /* Take up half the width */
+  padding: 16px;
+  border-right: 1px solid #ccc; /* Add a right border */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+/* Right panel: Monaco Editor */
+.editor {
+  width: 50%; /* Take up half the width */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
