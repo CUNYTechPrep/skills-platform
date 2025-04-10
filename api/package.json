@@ -15,10 +15,13 @@
   "author": "CUNY Tech Prep",
   "license": "MIT",
   "dependencies": {
-    "express": "^5.0.1"
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "vm2": "^3.9.19"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.13",
     "dotenv": "^16.4.7",

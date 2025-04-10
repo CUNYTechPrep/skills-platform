@@ -11,6 +11,9 @@
     "prettier": "prettier . --check"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "@tailwindcss/vite": "^4.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
