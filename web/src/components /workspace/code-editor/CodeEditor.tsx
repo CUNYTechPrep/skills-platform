@@ -7,16 +7,17 @@ const CodeEditor: React.FC<CodeEditorProps> = () => {
   const [code, setCode] = useState<string>(""); // store user input
   const [output, setOutput] = useState<string | null>(null); // State to store the backend response
   const [error, setError] = useState<string | null>(null); // State to store errors
-
+  const PORT = 8080; // Default port for the backend
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/execute", {
+      const wrappedCode = `${code}`;
+      const response = await fetch(`http://localhost:${PORT}/api/execute`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          code: `function solution(input) { return input * 2; }`,
+          code: wrappedCode,
           input: [2, 7, 11, 15],
         }),
       });

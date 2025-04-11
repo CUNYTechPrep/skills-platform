@@ -14,7 +14,6 @@ app.options("/api/execute", cors());
 // POST endpoint to execute code
 app.post("/api/execute", (req, res) => {
   const { code, input } = req.body;
-
   try {
     const vm = new VM({
       timeout: 1000, // Limit execution time
@@ -23,18 +22,18 @@ app.post("/api/execute", (req, res) => {
 
     // Run the code
     const result = vm.run(`
-      const solution = ${code};
+      ${code}
       solution(input);
     `);
-
-    res.json({ result });
+    console.log("Backend result:", result); // Log the result
+    res.status(200).json({ result });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
 });
 
 // Start the server
-const PORT = 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
