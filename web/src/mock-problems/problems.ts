@@ -4,7 +4,7 @@ export type Problem = {
 	difficulty: string;
 	category: string;
 	order: number;
-	videoId?: string;
+	videoId: string;
 };
 
 export const problems: Problem[] = [

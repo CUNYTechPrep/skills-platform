@@ -1,0 +1,22 @@
+.problem-description-container {
+    padding: 16px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .problem-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .problem-description-text {
+    margin-bottom: 16px;
+  }
+  
+  .problem-example {
+    background-color: #f4f4f4;
+    color: black; /* <-- Add this line */
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
