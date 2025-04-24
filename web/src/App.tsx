@@ -1,45 +1,31 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import SideNav from "./components/SideNav";
+import PopularActivities from "./components/PopularActivities";
+import WeeklySchedule from "./components/WeeklySchedule";
+import RightContent from "./components/RightContent";
+import PersonalBests from "./components/PersonalBests";
 
-function App() {
-  const [count, setCount] = useState(0);
-  const [apiData, setApiData] = useState("");
-
-  useEffect(() => {
-    fetch(import.meta.env.VITE_BASE_API_URL + "/api/test")
-      .then((res) => res.json())
-      .then((body) => setApiData(body.message));
-  });
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="bg-[url('./assets/temp-background.png')] bg-cover w-screen h-screen flex justify-center items-center p-4">
+      <div className="border rounded-3xl border-hidden w-full max-w-7xl h-full max-h-[95vh] bg-white flex flex-col md:flex-row overflow-hidden">
+        <div className="flex-shrink-0">
+          <SideNav />
+        </div>
+        <div className="flex flex-col flex-1 w-full p-4 md:p-8 overflow-y-auto min-h-0">
+          <PopularActivities />
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 mt-8">
+            <div className="w-full md:w-1/2">
+              <WeeklySchedule />
+            </div>
+            <div className="w-full md:w-1/2">
+              <PersonalBests />
+            </div>
+          </div>
+        </div>
+        <div className="w-full md:w-64 p-4 flex-shrink-0 overflow-y-auto min-h-0">
+          <RightContent />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          <strong>Message from api:</strong> {apiData}
-        </p>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
-
-export default App;
