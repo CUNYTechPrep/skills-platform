@@ -14,6 +14,7 @@ app.options("/api/execute", cors());
 // POST endpoint to execute code
 app.post("/api/execute", (req, res) => {
   const { code, input } = req.body;
+  console.log("Received code:", code); // Log the received code
   try {
     const vm = new VM({
       timeout: 1000, // Limit execution time

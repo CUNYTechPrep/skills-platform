@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
 
-const SideNav: React.FC = () => {
+interface SideNavProps {
+  setCurrentPage: (page: string) => void;
+}
+
+const SideNav: React.FC<SideNavProps> = ({ setCurrentPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleNavClick = (page: string) => {
+    setCurrentPage(page);
+    toggleMenu(); // close the menu after clicking
   };
 
   return (
@@ -31,55 +38,50 @@ const SideNav: React.FC = () => {
         <div className="mt-6 text-xl md:text-2xl p-2 md:p-0 whitespace-nowrap">
           TTP Code App
         </div>
-        <a
-          href="#home"
+
+        {/* 👇 use onClick instead of href */}
+        <button
+          onClick={() => handleNavClick("home")}
           className="text-base md:text-lg p-2 md:p-0"
-          onClick={toggleMenu}
         >
           Home
-        </a>
-        <a
-          href="#profile"
+        </button>
+        <button
+          onClick={() => handleNavClick("profile")}
           className="text-base md:text-lg p-2 md:p-0"
-          onClick={toggleMenu}
         >
           Profile
-        </a>
-        <a
-          href="#schedule"
+        </button>
+        <button
+          onClick={() => handleNavClick("schedule")}
           className="text-base md:text-lg p-2 md:p-0"
-          onClick={toggleMenu}
         >
           Schedule
-        </a>
-        <a
-          href="#activities"
+        </button>
+        <button
+          onClick={() => handleNavClick("activities")}
           className="text-base md:text-lg p-2 md:p-0"
-          onClick={toggleMenu}
         >
           Activities
-        </a>
-        <a
-          href="#settings"
+        </button>
+        <button
+          onClick={() => handleNavClick("settings")}
           className="text-base md:text-lg p-2 md:p-0"
-          onClick={toggleMenu}
         >
           Settings
-        </a>
-        <a
-          href="#quiz"
+        </button>
+        <button
+          onClick={() => handleNavClick("quiz")}
           className="text-base md:text-lg p-2 md:p-0"
-          onClick={toggleMenu}
         >
           Quiz
-        </a>
-        <a
-          href="#leetcode"
+        </button>
+        <button
+          onClick={() => handleNavClick("leetcode")}
           className="text-base md:text-lg p-2 md:p-0"
-          onClick={toggleMenu}
         >
           Leetcode
-        </a>
+        </button>
       </div>
 
       {isOpen && (

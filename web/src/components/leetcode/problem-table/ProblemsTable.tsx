@@ -1,5 +1,5 @@
 import React from "react";
-import { problems } from "../../mock-problems/problems"; // Import the problems array
+import { problems } from "../mock-problems/problems"; // Import the problems array
 
 const ProblemsTable: React.FC = () => {
   return (

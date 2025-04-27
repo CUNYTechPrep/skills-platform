@@ -9,6 +9,7 @@ const CodeEditor: React.FC<CodeEditorProps> = () => {
   const [error, setError] = useState<string | null>(null); // State to store errors
   const PORT = 8080; // Default port for the backend
   const handleSubmit = async () => {
+    console.log("Submitting code:", code); // Log the code to be submitted
     try {
       const wrappedCode = `${code}`;
       const response = await fetch(`http://localhost:${PORT}/api/execute`, {
@@ -46,7 +47,7 @@ const CodeEditor: React.FC<CodeEditorProps> = () => {
           theme="vs-dark"
           value={code}
           onChange={(value) => setCode(value || "")}
-          defaultValue={`// Write your solution here\nfunction solution() {\n\n}`}
+          defaultValue={`// Write your solution here\nfunction solution(input) {\n\n}`}
           options={{
             minimap: { enabled: false },
           }}

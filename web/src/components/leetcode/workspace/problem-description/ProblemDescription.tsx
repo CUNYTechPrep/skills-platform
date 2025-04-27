@@ -1,5 +1,5 @@
 import React from "react";
-import { problemsDescriptions } from "../../../mock-problems/problems-descriptions";
+import { problemsDescriptions } from "../../mock-problems/problems-descriptions";
 import "./problem-description.css"; // <-- import the CSS
 
 type ProblemDescriptionProps = {};
