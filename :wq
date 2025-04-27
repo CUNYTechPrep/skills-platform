@@ -1,0 +1,35 @@
+rebasing main, save local changes
+
+# Conflicts:
+#	web/package-lock.json
+#	web/package.json
+#	web/src/App.css
+#	web/src/App.tsx
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# interactive rebase in progress; onto 0541107
+# Last command done (1 command done):
+#    pick d6c9543 save local changes
+# Next commands to do (3 remaining commands):
+#    pick cbb1599 trying to figure out how to get around cors
+#    pick 9fea8ff added barebones functionality for a user to be able to run two some
+# You are currently rebasing branch 'leetcode-style-editor' on '0541107'.
+#
+# Changes to be committed:
+#	modified:   api/package-lock.json
+#	modified:   api/package.json
+#	modified:   api/src/index.ts
+#	new file:   generated/prisma/libquery_engine-darwin-arm64.dylib.node
+#	modified:   web/package-lock.json
+#	modified:   web/package.json
+#	modified:   web/src/App.css
+#	new file:   web/src/components /problem-table/ProblemsTable.tsx
+#	new file:   web/src/components /workspace/Workspace.tsx
+#	new file:   web/src/components /workspace/code-editor/CodeEditor.tsx
+#	new file:   web/src/components /workspace/code-editor/code-editor.css
+#	new file:   web/src/components /workspace/problem-description/ProblemDescription.tsx
+#	new file:   web/src/components /workspace/workspace.css
+#	new file:   web/src/mock-problems/problems.ts
+#
