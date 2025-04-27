@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const SideNav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +33,7 @@ const SideNav: React.FC = () => {
           TTP Code App
         </div>
         <a
-          href="#home"
+          href="/"
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
@@ -73,13 +74,21 @@ const SideNav: React.FC = () => {
         >
           Quiz
         </a>
-        <a
-          href="#leetcode"
+        {/* route to leetcode */}
+        <Link
+          to="/leetcode"
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
           Leetcode
-        </a>
+        </Link>
+        {/* <a
+          href="/leetcode"
+          className="text-base md:text-lg p-2 md:p-0"
+          onClick={toggleMenu}
+        >
+          Leetcode
+        </a> */}
       </div>
 
       {isOpen && (
