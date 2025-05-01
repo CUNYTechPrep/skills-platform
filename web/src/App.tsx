@@ -6,12 +6,13 @@ import RightContent from './components/RightContent';
 import PersonalBests from './components/PersonalBests';
 import Leetcode from './Leetcode';
 import { useLocation } from 'react-router-dom';
+import './App.css';
 
 
 export default function App() {
   return (
     <div className="bg-[url('./assets/temp-background.png')] bg-cover w-screen h-screen flex justify-center items-center p-4">
-      <div className="border rounded-3xl border-hidden w-full max-w-7xl h-full max-h-[95vh] bg-white flex flex-col md:flex-row overflow-hidden">
+      <div className="border rounded-3xl border-hidden w-[90%] h-full max-h-[95vh] bg-white flex flex-col md:flex-row overflow-hidden">
         <div className="flex-shrink-0">
           <SideNav />
         </div>

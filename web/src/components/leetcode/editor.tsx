@@ -19,10 +19,10 @@ const CodeEditor = () => {
         onClick={() => alert("Selecting language")}>
             javascript
         </button>
-
+        {/*  use Monaco */}
         <Editor height="90vh" theme = 'vs-dark' 
         defaultLanguage="javascript" 
-        defaultValue=" // start coding here"
+        defaultValue={`// Write your solution here\nfunction solution(input) {\n\n}`}
         value = {value}
         onChange={(value) => setValue(value || "")}
         onMount={onMount}
