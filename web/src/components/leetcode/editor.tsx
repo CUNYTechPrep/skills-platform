@@ -12,8 +12,6 @@ const CodeEditor = () => {
     editor.focus();
   }
   return (
-
-
     <div >
         <button className = "bg-pink-600 text-white px-8 py-2 rounded transition mb-4"
         onClick={() => alert("Selecting language")}>
@@ -27,11 +25,7 @@ const CodeEditor = () => {
         onChange={(value) => setValue(value || "")}
         onMount={onMount}
         />
-
     </div>
-
-
-
 
   );
 };

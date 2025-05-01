@@ -16,14 +16,14 @@ export default function App() {
         <div className="flex-shrink-0">
           <SideNav />
         </div>
-        <div className="flex flex-col flex-1 w-full p-4 md:p-8 overflow-y-auto min-h-0">
+        <div className="flex flex-col flex-1 w-full p-4 md:p-8 min-h-0">
           <Routes>
             <Route
               path="/"
               element={
                 <>
                   <PopularActivities />
-                  <div className="flex flex-col md:flex-row gap-4 md:gap-8 mt-8">
+                  <div className="flex flex-col md:flex-row gap-4 md:gap-8 ">
                     <div className="w-full md:w-1/2">
                       <WeeklySchedule />
                     </div>

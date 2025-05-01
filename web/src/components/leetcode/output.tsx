@@ -15,7 +15,7 @@ const Output: React.FC = () => {
             Run Code
         </button>
 
-        <section className="w-full border rounded bg-gray-100 min-h-[150px] py-10">
+        <section className="w-full border rounded bg-gray-100 min-h-[150px] ">
             {/* editor output */}
             <pre className="whitespace-pre-wrap text-black">{output}</pre>
         </section>
