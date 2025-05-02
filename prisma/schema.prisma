@@ -89,5 +89,53 @@ model Option {
   updatedAt  DateTime @updatedAt
 }
 
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
 
+model LeetcodeSubmissions {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  problemId  Int
+  languageId Int
+  code       String
+  user       User     @relation(fields: [userId], references: [id])
+  problem    Problem  @relation(fields: [problemId], references: [id])
+  language   Language @relation(fields: [languageId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
 
+model Problem {
+  id          Int                  @id @default(autoincrement())
+  name        String
+  topicId     Int
+  description String
+  difficulty  Difficulty
+  testCases   TestCase[]
+  submissions LeetcodeSubmissions[]
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+}
+
+model Language {
+  id          Int                    @id @default(autoincrement())
+  name        String                 @unique
+  extension   String           
+  submissions LeetcodeSubmissions []
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+}
+
+model TestCase {
+  id         Int      @id @default(autoincrement())
+  problemId  Int
+  input      String
+  expected   String
+  isHidden   Boolean  @default(true)
+  problem    Problem  @relation(fields: [problemId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
