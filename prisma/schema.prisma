@@ -12,13 +12,128 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  ADMIN
+  INSTRUCTOR
+  STUDENT
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  name      String
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          Int              @id @default(autoincrement())
+  email       String           @unique
+  name        String
+  password    String
+  role        Role
+  completions UserCompletion[] 
+  submissions LeetcodeSubmissions[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model UserCompletion {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  quizId     Int
+  text       String
+  completion Boolean
+  user       User     @relation(fields: [userId], references: [id])
+  quiz       Quiz     @relation(fields: [quizId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, quizId])
+}
+
+model Topic {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  quizzes     Quiz[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Quiz {
+  id           Int              @id @default(autoincrement())
+  name         String
+  topicId      Int
+  numQuestions Int
+  questions    Question[]
+  completions  UserCompletion[]
+  topic        Topic            @relation(fields: [topicId], references: [id])
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+model Question {
+  id        Int      @id @default(autoincrement())
+  quizId    Int
+  text      String
+  options   Option[]
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Option {
+  id         Int      @id @default(autoincrement())
+  questionId Int
+  text       String
+  question   Question @relation(fields: [questionId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model LeetcodeSubmissions {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  problemId  Int
+  languageId Int
+  code       String
+  user       User     @relation(fields: [userId], references: [id])
+  problem    Problem  @relation(fields: [problemId], references: [id])
+  language   Language @relation(fields: [languageId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Problem {
+  id          Int                  @id @default(autoincrement())
+  name        String
+  topicId     Int
+  description String
+  difficulty  Difficulty
+  testCases   TestCase[]
+  submissions LeetcodeSubmissions[]
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+}
+
+model Language {
+  id          Int                    @id @default(autoincrement())
+  name        String                 @unique
+  extension   String           
+  submissions LeetcodeSubmissions []
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+}
+
+model TestCase {
+  id         Int      @id @default(autoincrement())
+  problemId  Int
+  input      String
+  expected   String
+  isHidden   Boolean  @default(true)
+  problem    Problem  @relation(fields: [problemId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
