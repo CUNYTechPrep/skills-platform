@@ -22,18 +22,17 @@ enum Role {
 }
 
 model User {
-  id          Int              @id @default(autoincrement())
-  email       String           @unique
-  name        String
-  password    String
-  role        Role
-  completions UserCompletion[] 
-  submissions LeetcodeSubmissions[]
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  id                  Int                 @id @default(autoincrement())
+  email               String              @unique
+  name                String
+  role                Role
+  quizCompletions     QuizCompletions[] 
+  leetcodesubmissions LeetcodeSubmissions[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
 }
 
-model UserCompletion {
+model QuizCompletions {
   id         Int      @id @default(autoincrement())
   userId     Int
   quizId     Int
@@ -62,7 +61,7 @@ model Quiz {
   topicId      Int
   numQuestions Int
   questions    Question[]
-  completions  UserCompletion[]
+  completions  QuizCompletions[]
   topic        Topic            @relation(fields: [topicId], references: [id])
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
