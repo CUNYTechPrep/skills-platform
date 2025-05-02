@@ -32,53 +32,60 @@ const SideNav: React.FC = () => {
           TTP Code App
         </div>
         <a
-          href="#home"
+          href="/"
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
           Home
         </a>
         <a
-          href="#profile"
+          href="#profile" //update this to the correct route
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
           Profile
         </a>
         <a
-          href="#schedule"
+          href="#schedule" //update this to the correct route
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
           Schedule
         </a>
         <a
-          href="#activities"
+          href="#activities" //update this to the correct route
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
           Activities
         </a>
         <a
-          href="#settings"
+          href="#settings" //update this to the correct route
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
           Settings
         </a>
         <a
-          href="#quiz"
+          href="#quiz" //update this to the correct route
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
           Quiz
         </a>
         <a
-          href="#leetcode"
+          href="#leetcode" //update this to the correct route
           className="text-base md:text-lg p-2 md:p-0"
           onClick={toggleMenu}
         >
           Leetcode
+        </a>
+        <a
+          href="/about" //update this to the correct route
+          className="text-base md:text-lg p-2 md:p-0"
+          onClick={toggleMenu}
+        >
+          About Us
         </a>
       </div>
 

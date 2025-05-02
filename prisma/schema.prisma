@@ -21,12 +21,6 @@ enum Role {
   STUDENT
 }
 
-enum Difficulty {
-  EASY
-  MEDIUM
-  HARD
-}
-
 model User {
   id                  Int                 @id @default(autoincrement())
   email               String              @unique
@@ -92,6 +86,12 @@ model Option {
   updatedAt  DateTime @updatedAt
 }
 
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
 model LeetcodeSubmissions {
   id         Int      @id @default(autoincrement())
   userId     Int
@@ -136,11 +136,3 @@ model TestCase {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
-
-//Correct Answers
-//Youtube Link to question ()
-//Quizzes what they have done
-//Topics 
-
-
-
