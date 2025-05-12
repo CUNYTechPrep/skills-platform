@@ -15,7 +15,9 @@
   "author": "CUNY Tech Prep",
   "license": "MIT",
   "dependencies": {
-    "express": "^5.0.1"
+    "@types/node-fetch": "^2.6.12",
+    "express": "^5.0.1",
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",

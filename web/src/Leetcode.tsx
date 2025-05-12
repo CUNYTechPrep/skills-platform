@@ -1,40 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProblemDescription from "./components/leetcode/workspace/problem-description/ProblemDescription";
 import CodeEditor from "./components/leetcode/editor";
 import Output from "./components/leetcode/output";
+import QuestionList from "./components/leetcode/QuestionList";
+import { getRandomQuestion } from "./services/leetcodeApi";
 
 function Leetcode() {
   // Centralized state management
   const [code, setCode] = useState<string>(""); // Shared state for user input
   const [output, setOutput] = useState<string | null>(null); // Shared state for backend response
   const [error, setError] = useState<string | null>(null); // Shared state for errors
+  const [selectedQuestion, setSelectedQuestion] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  
+  // Function to handle random question selection
+  const handleRandomQuestion = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const question = await getRandomQuestion();
+      console.log('Random question fetched:', question); // Debug log
+      if (!question) {
+        throw new Error('No question received from API');
+      }
+      setSelectedQuestion(question);
+    } catch (err) {
+      console.error('Error in handleRandomQuestion:', err); // Debug log
+      setError("Failed to fetch random question");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Load a random question on component mount
+  useEffect(() => {
+    handleRandomQuestion();
+  }, []);
+
   return (
     <section className="w-full h-full p-4">
-      <div className="flex flex-row gap-4">
-        {/* Left panel - Problem Description */}
-        <div className="w-1/3 min-h-0 rounded-md">
-          <p>Problem Description</p>
-          <ProblemDescription />
-        </div>
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-row gap-4">
+          {/* Left panel - Problem Description */}
+          <div className="w-1/3 min-h-0 rounded-md">
+            <div className="flex justify-between items-center mb-2">
+              <p>Problem Description</p>
+              <button 
+                onClick={handleRandomQuestion}
+                className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                disabled={loading}
+              >
+                {loading ? 'Loading...' : 'New Random Question'}
+              </button>
+            </div>
+            <ProblemDescription selectedQuestion={selectedQuestion} />
+          </div>
 
-        {/* Middle panel - Code Editor */}
-        <div className="w-1/3 min-h-0 rounded-md">
-          <p>Editor</p>
-          <CodeEditor code={code} setCode={setCode} />
-        </div>
+          {/* Middle panel - Code Editor */}
+          <div className="w-1/3 min-h-0 rounded-md">
+            <p>Editor</p>
+            <CodeEditor code={code} setCode={setCode} />
+          </div>
 
-        {/* Right panel - Output */}
-        <div className="w-1/3 min-h-0 rounded-md">
-          <p>Output</p>
-          <Output
-            code={code}
-            output={output}
-            setOutput={setOutput}
-            error={error}
-            setError={setError}
-          />
+          {/* Right panel - Output */}
+          <div className="w-1/3 min-h-0 rounded-md">
+            <p>Output</p>
+            <Output
+              code={code}
+              output={output}
+              setOutput={setOutput}
+              error={error}
+              setError={setError}
+            />
+          </div>
         </div>
       </div>
     </section>
