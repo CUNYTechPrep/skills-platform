@@ -20,7 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // Test LeetCode API endpoint
-app.get("/api/test-leetcode", async (req: Request, res: Response) => {
+app.get("/api/question", async (req: Request, res: Response) => {
   try {
     console.log('Testing LeetCode API connection...');
     const response = await fetch('https://leetcode.com/graphql', {
@@ -40,7 +40,15 @@ app.get("/api/test-leetcode", async (req: Request, res: Response) => {
               total: totalNum
               questions: data {
                 title
+                titleSlug
                 difficulty
+                content
+                questionId
+                acRate
+                topicTags {
+                  name
+                  slug
+                }
               }
             }
           }

@@ -5,8 +5,9 @@ interface ProblemDescriptionProps {
     title: string;
     titleSlug: string;
     difficulty: string;
-    frontendQuestionId: string;
+    questionId: string;
     acRate: number;
+    content: string;
     topicTags: {
       name: string;
       slug: string;
@@ -27,7 +28,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ selectedQuestio
     <div className="p-4">
       <div className="mb-4">
         <h2 className="text-xl font-bold">
-          {selectedQuestion.frontendQuestionId}. {selectedQuestion.title}
+          {selectedQuestion.questionId}. {selectedQuestion.title}
         </h2>
         <div className="flex items-center gap-2 mt-2">
           <span
@@ -41,9 +42,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ selectedQuestio
           >
             {selectedQuestion.difficulty}
           </span>
-          <span className="text-sm text-gray-600">
-            Acceptance Rate: {(selectedQuestion.acRate * 100).toFixed(1)}%
-          </span>
+
         </div>
         <div className="flex gap-2 mt-2">
           {selectedQuestion.topicTags.map((tag) => (
@@ -57,10 +56,24 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ selectedQuestio
         </div>
       </div>
       
-      {/* Placeholder for problem description - you'll need to fetch this from LeetCode API */}
-      
-      <div className="prose max-w-none">
-        <p>Problem description will be loaded here...</p>
+      {/* Problem Description */}
+      <div className="prose prose-sm max-w-none">
+        {selectedQuestion.content ? (
+          <div 
+            className="text-sm leading-relaxed"
+            dangerouslySetInnerHTML={{ 
+              __html: selectedQuestion.content
+                .replace(/<pre>/g, '<pre class="bg-gray-50 p-4 rounded-lg overflow-x-auto my-4">')
+                .replace(/<code>/g, '<code class="bg-gray-100 px-1 rounded font-mono">')
+                .replace(/<p>/g, '<p class="my-4">')
+                .replace(/<ul>/g, '<ul class="my-4 pl-6 list-disc">')
+                .replace(/<ol>/g, '<ol class="my-4 pl-6 list-decimal">')
+                .replace(/<li>/g, '<li class="my-2">')
+            }} 
+          />
+        ) : (
+          <p>Problem description not available</p>
+        )}
       </div>
     </div>
   );

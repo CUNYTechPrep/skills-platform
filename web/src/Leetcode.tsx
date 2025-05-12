@@ -42,9 +42,9 @@ function Leetcode() {
       <div className="flex flex-col gap-4">
         <div className="flex flex-row gap-4">
           {/* Left panel - Problem Description */}
-          <div className="w-1/3 min-h-0 rounded-md">
-            <div className="flex justify-between items-center mb-2">
-              <p>Problem Description</p>
+          <div className="w-1/3 min-h-0 rounded-md border border-gray-200">
+            <div className="flex justify-between items-center mb-2 p-4 border-b border-gray-200">
+              <p className="text-lg font-semibold">Problem Description</p>
               <button 
                 onClick={handleRandomQuestion}
                 className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
@@ -53,18 +53,33 @@ function Leetcode() {
                 {loading ? 'Loading...' : 'New Random Question'}
               </button>
             </div>
-            <ProblemDescription selectedQuestion={selectedQuestion} />
+            {error && (
+              <div className="p-4 text-red-500 bg-red-50 border-b border-red-200">
+                {error}
+              </div>
+            )}
+            {loading ? (
+              <div className="p-4 text-gray-500">Loading question...</div>
+            ) : (
+              <div className="overflow-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+                <ProblemDescription selectedQuestion={selectedQuestion} />
+              </div>
+            )}
           </div>
 
           {/* Middle panel - Code Editor */}
-          <div className="w-1/3 min-h-0 rounded-md">
-            <p>Editor</p>
+          <div className="w-1/3 min-h-0 rounded-md border border-gray-200">
+            <div className="p-4 border-b border-gray-200">
+              <p className="text-lg font-semibold">Editor</p>
+            </div>
             <CodeEditor code={code} setCode={setCode} />
           </div>
 
           {/* Right panel - Output */}
-          <div className="w-1/3 min-h-0 rounded-md">
-            <p>Output</p>
+          <div className="w-1/3 min-h-0 rounded-md border border-gray-200">
+            <div className="p-4 border-b border-gray-200">
+              <p className="text-lg font-semibold">Output</p>
+            </div>
             <Output
               code={code}
               output={output}

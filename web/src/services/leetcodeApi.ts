@@ -1,13 +1,14 @@
 // leetcode api url for fetching questions 
-const LEETCODE_API_URL = 'https://leetcode.com/graphql';
+const API_BASE_URL = 'http://localhost:8080/api';
 
 // interface for the question object
 interface Question {
   title: string;
   titleSlug: string;
   difficulty: string;
-  frontendQuestionId: string;
+  questionId: string;
   acRate: number;
+  content: string;
   topicTags: {
     name: string;
     slug: string;
@@ -24,53 +25,13 @@ interface QuestionListResponse {
 
 // a function to fetch questions from the leetcode api
 export const fetchQuestions = async (limit: number = 50, skip: number = 0) => {
-  const query = `
-    query problemsetQuestionList($categorySlug: String, $limit: Int, $skip: Int, $filters: QuestionListFilterInput) {
-      problemsetQuestionList: questionList(
-        categorySlug: $categorySlug
-        limit: $limit
-        skip: $skip
-        filters: $filters
-      ) {
-        total: totalNum
-        questions: data {
-          acRate
-          difficulty
-          frontendQuestionId: questionFrontendId
-          isFavor
-          paidOnly: isPaidOnly
-          status
-          title
-          titleSlug
-          topicTags {
-            name
-            slug
-          }
-        }
-      }
-    }
-  `;
-
-  // variables for the query    
-  const variables = {
-    categorySlug: "",
-    skip,
-    limit,
-    filters: {}
-  };
-
-  // get the questions from the leetcode api
   try {
-    const response = await fetch(LEETCODE_API_URL, {
-      method: 'POST',
+    const response = await fetch(`${API_BASE_URL}/question`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
     });
 
     if (!response.ok) {
@@ -78,15 +39,15 @@ export const fetchQuestions = async (limit: number = 50, skip: number = 0) => {
     }
 
     const data = await response.json();
-    console.log('LeetCode API Response:', data);
+    console.log('API Response:', data);
     
-    if (!data.data || !data.data.problemsetQuestionList) {
-      throw new Error('Invalid response format from LeetCode API');
+    if (!data.data || !data.data.data || !data.data.data.problemsetQuestionList) {
+      throw new Error('Invalid response format from API');
     }
 
-    return data.data as QuestionListResponse;
+    return data.data.data as QuestionListResponse;
   } catch (error) {
-    console.error('Error fetching LeetCode questions:', error);
+    console.error('Error fetching questions:', error);
     throw error;
   }
 };
@@ -99,7 +60,7 @@ export const getRandomQuestion = async() => {
         console.log('Initial response:', response);
         
         if (!response.problemsetQuestionList || !response.problemsetQuestionList.total) {
-            throw new Error('Invalid response format from LeetCode API');
+            throw new Error('Invalid response format from API');
         }
 
         const totalQuestions = response.problemsetQuestionList.total;

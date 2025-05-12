@@ -5,8 +5,9 @@ interface Question {
   title: string;
   titleSlug: string;
   difficulty: string;
-  frontendQuestionId: string;
+  questionId: string;
   acRate: number;
+  content: string;
   topicTags: {
     name: string;
     slug: string;
@@ -47,9 +48,9 @@ const QuestionList: React.FC<QuestionListProps> = ({ onSelectQuestion, selectedQ
       <div className="grid gap-4">
         {questions.map((question) => (
           <div
-            key={question.frontendQuestionId}
+            key={question.questionId}
             className={`p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer ${
-              selectedQuestionId === question.frontendQuestionId
+              selectedQuestionId === question.questionId
                 ? 'border-blue-500 bg-blue-50'
                 : ''
             }`}
@@ -58,7 +59,7 @@ const QuestionList: React.FC<QuestionListProps> = ({ onSelectQuestion, selectedQ
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="text-lg font-semibold">
-                  {question.frontendQuestionId}. {question.title}
+                  {question.questionId}. {question.title}
                 </h3>
                 <div className="flex gap-2 mt-2">
                   {question.topicTags.map((tag) => (
