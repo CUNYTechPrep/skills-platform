@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Output from "./leetcode/output";
 
 const SideNav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

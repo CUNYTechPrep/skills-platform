@@ -9,11 +9,16 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "prisma": "^6.6.0",
     "tailwind-scrollbar-hide": "^2.0.0"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
-    "react-icons": "^5.5.0"
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.5.3",
+    "vm2": "^3.9.19"
   }
 }
